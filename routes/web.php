@@ -32,10 +32,15 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
-// Себет (уақытша)
+// Себет маршруттары
 Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
+    return view('cart.index');
+})->name('cart.index');
+
+Route::post('/cart/add/{product}', function ($productId) {
+    // Уақытша функция
+    return redirect()->back()->with('success', 'Өнім себетке қосылды');
+})->name('cart.add');
 
 // Профиль (уақытша)
 Route::get('/profile', function () {
