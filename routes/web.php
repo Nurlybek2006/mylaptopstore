@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController; // ← МІНДЕТТІ
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Аутентификация маршруттары
@@ -36,10 +37,13 @@ Route::post('/cart/update', [CartController::class, 'update'])->name('cart.updat
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
-// Профиль (уақытша)
-Route::get('/profile', function () {
-    return view('profile');
-})->name('profile');
+// Профиль маршруттары
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+});
 
 // Админ (уақытша)
 Route::get('/admin', function () {

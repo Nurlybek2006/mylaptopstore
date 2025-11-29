@@ -41,7 +41,7 @@
                     </a>
                     
                     <a class="nav-link nav-item {{ request()->routeIs('profile') ? 'active' : '' }}" 
-                       href="{{ route('profile') }}">
+                       href="{{ route('profile.index') }}">
                         <i class="fas fa-user me-1"></i>Профиль
                     </a>
 
