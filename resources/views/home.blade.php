@@ -1007,7 +1007,7 @@
             <div class="support-content fade-in-up">
                 <h2 class="support-title">Көмек керек пе?</h2>
                 <p class="support-text">Біз сізге ноутбук таңдауда кеңес береміз</p>
-                <a href="{{ route('contact') }}" class="btn btn-support">
+                <a href="{{ route('contact.index') }}" class="btn btn-support">
                     <i class="fas fa-phone me-2"></i>Кеңес алу
                 </a>
             </div>

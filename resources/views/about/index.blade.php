@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Біз туралы - MYLAPTOPSTORE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f8fafc;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Навигация */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(37, 99, 235, 0.95) !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem !important;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: white !important;
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Герой бөлімі */
+        .about-hero {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(29, 78, 216, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 150px 0;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            from {
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            }
+            to {
+                text-shadow: 2px 2px 15px rgba(255,255,255,0.2);
+            }
+        }
+        
+        .about-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        /* Статистика */
+        .stats-section {
+            background: white;
+            padding: 80px 0;
+            margin-top: -50px;
+            position: relative;
+            z-index: 3;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .stats-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+            line-height: 1;
+            text-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        }
+        
+        .stat-label {
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Біз туралы */
+        .about-section {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: lineExpand 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes lineExpand {
+            from {
+                width: 80px;
+            }
+            to {
+                width: 120px;
+            }
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+        
+        .about-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--secondary);
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        
+        .feature-list li {
+            padding: 0.8rem 0;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding-left: 1rem;
+        }
+        
+        .feature-list li:hover {
+            background: rgba(37, 99, 235, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .feature-list li i {
+            color: var(--accent);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-list li:hover i {
+            transform: scale(1.2);
+        }
+        
+        /* Команда */
+        .team-section {
+            background: linear-gradient(135deg, var(--light) 0%, #fff 100%);
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            text-align: center;
+            height: 100%;
+            position: relative;
+        }
+        
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .team-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .team-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .team-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.1));
+        }
+        
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .team-card:hover .team-image img {
+            transform: scale(1.1);
+        }
+        
+        .team-info {
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-position {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .team-description {
+            color: var(--secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .social-link:hover::before {
+            left: 100%;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        /* Миссия және құндылықтар */
+        .mission-section {
+            padding: 120px 0;
+            background: white;
+            position: relative;
+        }
+        
+        .mission-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s ease;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
+        }
+        
+        .mission-card:hover::before {
+            transform: scale(1);
+        }
+        
+        .mission-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+        
+        .mission-card:hover .mission-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .mission-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mission-description {
+            opacity: 0.9;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Деректер */
+        .timeline-section {
+            padding: 120px 0;
+            background: var(--light);
+            position: relative;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            animation: timelinePulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes timelinePulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            width: calc(50% - 50px);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            transform: rotate(45deg);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -10px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: auto;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -10px;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-year:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-year {
+            right: calc(50% + 25px);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-year {
+            left: calc(50% + 25px);
+        }
+        
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        /* Сертификаттар */
+        .certificates-section {
+            padding: 120px 0;
+            background: white;
+            position: relative;
+        }
+        
+        .certificate-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+        
+        .certificate-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .certificate-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .certificate-card:hover .certificate-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--accent);
+        }
+        
+        /* Карта бөлімі */
+        .map-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+            position: relative;
+        }
+        
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            height: 500px;
+            position: relative;
+        }
+        
+        .map-container:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+        
+        .contact-info-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            height: 100%;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding: 1.2rem;
+            background: var(--light);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(8px);
+            background: linear-gradient(135deg, var(--light) 0%, #e2e8f0 100%);
+            border-left-color: var(--primary);
+        }
+        
+        .cta-buttons a {
+            transition: all 0.3s ease !important;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-buttons a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .cta-buttons a:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2) !important;
+        }
+        
+        .cta-buttons a:hover::before {
+            left: 100%;
+        }
+        
+        /* Анимациялар */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in-left {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in-right {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+        
+        /* Мобильдік үйлесімділік */
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-hero {
+                padding: 100px 0;
+                background-attachment: scroll;
+            }
+            
+            .stats-section {
+                margin-top: -30px;
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+            
+            .timeline-content::before {
+                left: -10px !important;
+                right: auto !important;
+            }
+            
+            .timeline-year {
+                left: 0 !important;
+                right: auto !important;
+            }
+            
+            .map-container {
+                height: 300px;
+                margin-bottom: 2rem;
+            }
+            
+            .contact-info-card {
+                padding: 1.5rem !important;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    @include('layouts.navbar')
+
+    <!-- Герой бөлімі -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>Біз туралы</h1>
+                <p>Қазақстанның жетекші ноутбук дистрибьюторы - сіздің сенімді технологиялық серіктесіңіз</p>
+                <div class="mt-4">
+                    <a href="#mission" class="btn btn-light btn-lg me-3" style="border-radius: 25px; padding: 12px 30px;">
+                        <i class="fas fa-bullseye me-2"></i>Біздің миссия
+                    </a>
+                    <a href="#team" class="btn btn-outline-light btn-lg" style="border-radius: 25px; padding: 12px 30px;">
+                        <i class="fas fa-users me-2"></i>Біздің команда
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-item fade-in-up">
+                        <span class="stat-number" data-count="2">0</span>
+                        <span class="stat-label">Жылдық тәжірибе</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item fade-in-up">
+                        <span class="stat-number" data-count="10">0</span>
+                        <span class="stat-label">Қанағаттанған клиенттер</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item fade-in-up">
+                        <span class="stat-number" data-count="50">0</span>
+                        <span class="stat-label">Өнім брендтері</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item fade-in-up">
+                        <span class="stat-number" data-count="100">0</span>
+                        <span class="stat-label">Сапа кепілдігі</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Біз туралы -->
+    <section class="about-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title fade-in-left">Біздің тарихымыз</h2>
+                    <p class="section-subtitle fade-in-left">
+                        2022 жылдан бастап технологиялар әлемінде сенімді серіктес ретінде жолға шықтық
+                    </p>
+                    <div class="about-content fade-in-left">
+                        <p>
+                            MYLAPTOPSTORE - бұл Қазақстандағы жетекші ноутбук сату және дистрибуция компаниясы. 
+                            Біз әртүрлі қажеттіліктерге арналған ең жақсы ноутбуктерді ұсынамыз.
+                        </p>
+                        <p>
+                            Біздің мақсатымыз - әрбір клиентке оның қажеттіліктеріне сай ең үздік шешімді табу.
+                        </p>
+                        
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> Ресми кепілдік</li>
+                            <li><i class="fas fa-check"></i> Тегін жеткізу</li>
+                            <li><i class="fas fa-check"></i> Қайтару мүмкіндігі</li>
+                            <li><i class="fas fa-check"></i> Техникалық қолдау</li>
+                            <li><i class="fas fa-check"></i> Бөліп төлеу</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="fade-in-right">
+                        <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                             alt="Біздің офис" 
+                             class="img-fluid rounded-3 shadow-lg" 
+                             style="transform: perspective(1000px) rotateY(-5deg) rotateX(5deg); transition: transform 0.5s ease;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Миссия және құндылықтар -->
+    <section class="mission-section" id="mission">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-up">Біздің миссия мен құндылықтар</h2>
+            <p class="section-subtitle text-center fade-in-up">
+                Біздің жұмыс істеу принциптеріміз және болашаққа деген көзқарасымыз
+            </p>
+            
+            <div class="row mt-5">
+                <div class="col-lg-4 mb-4">
+                    <div class="mission-card fade-in-left">
+                        <div class="mission-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 class="mission-title">Миссия</h3>
+                        <p class="mission-description">
+                            Әрбір қазақстандыққа оның бюджетіне және қажеттіліктеріне сай ең үздік ноутбукті ұсыну.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="mission-card fade-in-up">
+                        <div class="mission-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="mission-title">Көзқарас</h3>
+                        <p class="mission-description">
+                            Технологиялар саласындағы жетекші компания болу және инновацияларды дамыту.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="mission-card fade-in-right">
+                        <div class="mission-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="mission-title">Құндылықтар</h3>
+                        <p class="mission-description">
+                            Шынайылық, сапа, сенімділік және клиентке деген жауапкершілік - біздің негізгі құндылықтарымыз.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Деректер -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-up">Біздің саяхатымыз</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">2018</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Негізін қалау</h3>
+                        <p>Компанияның ресми түрде тіркелуі және алғашқы қадамдары</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Нарықта орнығу</h3>
+                        <p>Алғашқен ірі брендтермен ынтымақтастық басталды</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Өсу жылы</h3>
+                        <p>Клиенттер саны екі есе өсті және жаңа филиалдар ашылды</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Инновациялар</h3>
+                        <p>Онлайн сату жүйесі іске қосылып, қызмет көрсету сапасы жақсартылды</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-year">2024</div>
+                    <div class="timeline-content">
+                        <h3 class="timeline-title">Болашақ жоспарлар</h3>
+                        <p>Жаңа технологияларды енгізу және халықаралық нарыққа шығу</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Команда -->
+    <section class="team-section" id="team">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-up">Біздің команда</h2>
+            <p class="section-subtitle text-center fade-in-up">
+                Біздің табысымыздың кілті - білімді және тәжірибелі мамандар командасы
+            </p>
+            
+            <div class="row mt-5">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="team-card fade-in-left">
+                        <div class="team-image">
+                            <img src="{{ asset('storage/images/Nurlybek.jpg') }}" alt="Nurlybek Sarsenbekuly" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                        </div>
+                        <div class="team-info">
+                            <h3 class="team-name">Сәрсенбекұлы Нұрлыбек</h3>
+                            <p class="team-position">Негізін қалаушы & CEO</p>
+                            <p class="team-description">Технологиялар саласында 5 жылдық тәжірибесі бар маман</p>
+                            <div class="social-links">
+                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                <a href="https://www.instagram.com/nur1ybek06?igsh=bndzcnNlYzIxZnI=" class="social-link"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </section>
+
+    <!-- Сертификаттар -->
+    <section class="certificates-section">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-up">Біздің сертификаттарымыз</h2>
+            
+            <div class="row mt-5">
+                <div class="col-lg-4 mb-4">
+                    <div class="certificate-card fade-in-left">
+                        <div class="certificate-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>ASUS Authorized Distributor</h3>
+                        <p>ASUS компаниясының ресми сертификатталған дистрибьюторы</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="certificate-card fade-in-up">
+                        <div class="certificate-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3>HP Gold Partner</h3>
+                        <p>HP компаниясының алтын деңгейдегі серіктесі</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <div class="certificate-card fade-in-right">
+                        <div class="certificate-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Жылдың үздік IT компаниясы</h3>
+                        <p>2023 жылы Қазақстанның үздік IT компаниясы атандық</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карта бөлімі -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title text-center fade-in-up">Біздің орналасқан жеріміз</h2>
+            <p class="section-subtitle text-center fade-in-up">
+                Бізбен жеке кездесу үшін келіңіз немесе қашықтан байланысыңыз
+            </p>
+            
+            <div class="row mt-5">
+                <div class="col-lg-8 mb-4">
+                    <div class="map-container fade-in-left">
+                        <div id="map" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-info-card fade-in-right">
+                        <div class="info-header" style="text-align: center; margin-bottom: 2rem;">
+                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                <i class="fas fa-map-marker-alt" style="color: white; font-size: 1.5rem;"></i>
+                            </div>
+                            <h3 style="color: var(--dark); font-weight: 600; margin-bottom: 0.5rem;">Бізді табыңыз</h3>
+                            <p style="color: var(--secondary);">Біз сізді күтеміз</p>
+                        </div>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt" style="color: var(--primary); font-size: 1.2rem; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <h4 style="color: var(--dark); font-weight: 600; margin-bottom: 0.3rem; font-size: 1rem;">Мекенжай</h4>
+                                    <p style="color: var(--secondary); margin: 0; line-height: 1.5;">
+                                        Алматы қаласы,<br>
+                                        Шұғыла мкр,<br>
+                                        Береке 2/13 үйі
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-clock" style="color: var(--accent); font-size: 1.2rem; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <h4 style="color: var(--dark); font-weight: 600; margin-bottom: 0.3rem; font-size: 1rem;">Жұмыс уақыты</h4>
+                                    <p style="color: var(--secondary); margin: 0; line-height: 1.5;">
+                                        Дүйсенбі - Сенбі: 9:00 - 18:00<br>
+                                        Жексенбі: 10:00 - 16:00
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-phone" style="color: var(--success); font-size: 1.2rem; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <h4 style="color: var(--dark); font-weight: 600; margin-bottom: 0.3rem; font-size: 1rem;">Телефон</h4>
+                                    <p style="color: var(--secondary); margin: 0; line-height: 1.5;">
+                                        +7 (777) 366-43-32<br>
+                                        +7 (702) 626-93-69
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-envelope" style="color: var(--danger); font-size: 1.2rem; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                                <div>
+                                    <h4 style="color: var(--dark); font-weight: 600; margin-bottom: 0.3rem; font-size: 1rem;">Email</h4>
+                                    <p style="color: var(--secondary); margin: 0; line-height: 1.5;">
+                                        info@laptop.kz<br>
+                                        support@laptop.kz
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cta-buttons" style="margin-top: 2rem; display: flex; gap: 10px;">
+                            <a href="tel:+77773664332" 
+                               style="flex: 1; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 12px; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600;">
+                                <i class="fas fa-phone me-2"></i>Бізге қоңырау шал
+                            </a>
+                            <a href="https://wa.me/77773664332" 
+                               style="flex: 1; background: linear-gradient(135deg, var(--success) 0%, #059669 100%); color: white; padding: 12px; text-align: center; border-radius: 10px; text-decoration: none; font-weight: 600;">
+                                <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Maps API -->
+    <script>
+        function initMap() {
+            // Нақты координаттар: 43.211360, 76.795725
+            var location = {lat: 43.211360, lng: 76.795725};
+            
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 17,
+                center: location,
+                styles: [
+                    {
+                        "featureType": "all",
+                        "elementType": "geometry",
+                        "stylers": [{"color": "#f5f5f5"}]
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.text.fill",
+                        "stylers": [{"gamma": 0.01}, {"lightness": 20}, {"color": "#000000"}]
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.text.stroke",
+                        "stylers": [{"weight": "0.96"}, {"lightness": "16"}, {"visibility": "on"}, {"color": "#000000"}]
+                    },
+                    {
+                        "featureType": "all",
+                        "elementType": "labels.icon",
+                        "stylers": [{"visibility": "off"}]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry",
+                        "stylers": [{"lightness": 40}]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [{"lightness": 30}]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [{"lightness": 20}]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry",
+                        "stylers": [{"lightness": 20}]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry",
+                        "stylers": [{"lightness": 10}]
+                    },
+                    {
+                        "featureType": "transit",
+                        "elementType": "geometry",
+                        "stylers": [{"lightness": 40}]
+                    },
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [{"lightness": 20}]
+                    }
+                ]
+            });
+            
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: 'MYLAPTOPSTORE - Алматы, Шұғыла мкр, Береке 2/13 үйі',
+                icon: {
+                    url: 'data:image/svg+xml;base64,' + btoa(`
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="25" cy="25" r="25" fill="#2563eb" opacity="0.9"/>
+                            <circle cx="25" cy="25" r="15" fill="white"/>
+                            <circle cx="25" cy="25" r="8" fill="#2563eb"/>
+                            <path d="M25 12L25 38" stroke="white" stroke-width="2"/>
+                            <path d="M12 25L38 25" stroke="white" stroke-width="2"/>
+                            <path d="M20 15L25 10L30 15" stroke="white" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    `),
+                    scaledSize: new google.maps.Size(50, 50),
+                    anchor: new google.maps.Point(25, 50)
+                }
+            });
+            
+            var infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div style="padding: 15px; max-width: 280px; font-family: Arial, sans-serif;">
+                        <h3 style="margin: 0 0 12px 0; color: #2563eb; font-size: 18px; font-weight: bold;">
+                            <i class="fas fa-laptop" style="margin-right: 8px;"></i>MYLAPTOPSTORE
+                        </h3>
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-map-marker-alt" style="color: #2563eb; margin-right: 8px; width: 16px;"></i>
+                            <span style="color: #333; font-size: 14px;">
+                                Алматы, Шұғыла мкр, Береке 2/13 үйі
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <i class="fas fa-clock" style="color: #f59e0b; margin-right: 8px; width: 16px;"></i>
+                            <span style="color: #666; font-size: 13px;">
+                                09:00 - 20:00 (Дүй-Сен)<br>
+                                10:00 - 18:00 (Жексенбі)
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <i class="fas fa-phone" style="color: #10b981; margin-right: 8px; width: 16px;"></i>
+                            <span style="color: #666; font-size: 13px;">
+                                +7 (777) 366-43-32
+                            </span>
+                        </div>
+                        <div style="background: #f8fafc; padding: 8px; border-radius: 6px; margin-top: 10px;">
+                            <i class="fas fa-info-circle" style="color: #64748b; margin-right: 5px;"></i>
+                            <span style="color: #64748b; font-size: 12px;">
+                                Тегін паркинг және WiFi бар
+                            </span>
+                        </div>
+                    </div>
+                `
+            });
+            
+            marker.addListener('click', function() {
+                infoWindow.open(map, marker);
+            });
+            
+            // Автоматты түрде инфо-терезені ашу
+            setTimeout(() => {
+                infoWindow.open(map, marker);
+            }, 1500);
+            
+            // Картаны ортаға теңеу
+            map.setCenter(location);
+        }
+    </script>
+    
+    <!-- Google Maps API скрипті -->
+    <script async defer 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDQB9wVyyrggShRRdR5VKVvaSfUq4NpSs&callback=initMap&language=kk&region=KZ">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Жүктеу анимациясы
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingAnimation').style.opacity = '0';
+                document.getElementById('loadingAnimation').style.visibility = 'hidden';
+            }, 1000);
+        });
+
+        // Статистика санау анимациясы
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + (element.getAttribute('data-count') === '100' ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start) + (element.getAttribute('data-count') === '100' ? '%' : '+');
+                }
+            }, 16);
+        }
+
+        // Таймлайн анимациясы
+        function animateTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, index * 300);
+            });
+        }
+
+        // Анимация эффектілері
+        document.addEventListener('DOMContentLoaded', function() {
+            // Бастапқы анимациялар
+            const elements = document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right');
+            
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                
+                setTimeout(() => {
+                    element.style.transition = 'all 0.8s ease';
+                    element.style.opacity = '1';
+                }, index * 200);
+            });
+
+            // Статистиканы бақылау
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.getAttribute('data-count'));
+                        animateCounter(entry.target, target, 2000);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            statNumbers.forEach(stat => {
+                observer.observe(stat);
+            });
+
+            // Таймлайн бақылау
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateTimeline();
+                        timelineObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            const timelineSection = document.querySelector('.timeline-section');
+            if (timelineSection) {
+                timelineObserver.observe(timelineSection);
+            }
+
+            // Параллакс эффекті
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.about-hero');
+                
+                parallaxElements.forEach(element => {
+                    const speed = 0.5;
+                    element.style.backgroundPositionY = -(scrolled * speed) + 'px';
+                });
+            });
+
+            // Картаны көрсету
+            const mapSection = document.querySelector('.map-section');
+            const mapObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Картаны қайта жүктеу
+                        if (typeof initMap === 'function') {
+                            setTimeout(initMap, 500);
+                        }
+                        mapObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            if (mapSection) {
+                mapObserver.observe(mapSection);
+            }
+        });
+
+        function requestConsultation() {
+            alert('Біз сізге жақын арада хабарласамыз! Телефон нөміріңіз: +7 (777) 123-45-67');
+        }
+
+        // Навигацияны скроллдау
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

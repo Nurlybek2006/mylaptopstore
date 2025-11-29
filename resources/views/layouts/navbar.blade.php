@@ -22,11 +22,11 @@
                     <i class="fas fa-laptop me-1"></i>Ноутбуктер
                 </a>
                 <a class="nav-link nav-item {{ request()->routeIs('about') ? 'active' : '' }}" 
-                   href="{{ route('about') }}">
+                   href="{{ route('about.index') }}">
                     <i class="fas fa-info-circle me-1"></i>Біз туралы
                 </a>
                 <a class="nav-link nav-item {{ request()->routeIs('contact') ? 'active' : '' }}" 
-                   href="{{ route('contact') }}">
+                   href="{{ route('contact.index') }}">
                     <i class="fas fa-envelope me-1"></i>Байланыс
                 </a>
             </div>

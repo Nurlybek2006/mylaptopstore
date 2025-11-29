@@ -28,8 +28,8 @@
                 <ul class="list-unstyled">
                     <li><a href="{{ route('home') }}">Басты бет</a></li>
                     <li><a href="{{ route('products.index') }}">Ноутбуктер</a></li>
-                    <li><a href="{{ route('about') }}">Біз туралы</a></li>
-                    <li><a href="{{ route('contact') }}">Байланыс</a></li>
+                    <li><a href="{{ route('about.index') }}">Біз туралы</a></li>
+                    <li><a href="{{ route('contact.index') }}">Байланыс</a></li>
                     <li><a href="{{ route('marketplace') }}">MarketPlace</a></li>
                 </ul>
             </div>

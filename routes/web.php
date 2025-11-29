@@ -6,6 +6,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController; // ← МІНДЕТТІ
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 
 // Аутентификация маршруттары
@@ -54,3 +56,11 @@ Route::get('/admin', function () {
 Route::get('/marketplace', function () {
     return view('marketplace');
 })->name('marketplace');
+
+// Байланыс маршруттары
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact/message', [ContactController::class, 'storeContact'])->name('contact.message');
+Route::post('/contact/laptop-request', [ContactController::class, 'storeLaptopRequest'])->name('contact.laptop-request');
+
+// Біз туралы бет
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
