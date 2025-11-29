@@ -14,62 +14,65 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 
-// Аутентификация маршруттары
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // Бұл жерде қалады
+    // Аутентификация маршруттары
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // Бұл жерде қалады
 
-// Басты бет
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+    // Басты бет
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/about', [HomeController::class, 'about'])->name('about');
+    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
-// Продуктілер
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+    // Продуктілер
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
-// Категориялар
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+    // Категориялар
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
 
-// Себет маршруттары
-Route::middleware(['auth'])->group(function () {
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-    Route::get('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
-    Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-    Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-    Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-});
+    // Себет маршруттары
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+        Route::get('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+        Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+        Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+        Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+    });
 
-// Профиль маршруттары
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
-    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
-});
+    // Профиль маршруттары
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+        Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
+        Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+    });
 
-// Marketplace
-Route::get('/marketplace', function () {
-    return view('marketplace');
-})->name('marketplace');
+    // Marketplace
+    Route::get('/marketplace', function () {
+        return view('marketplace');
+    })->name('marketplace');
 
-// Байланыс маршруттары
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact/message', [ContactController::class, 'storeContact'])->name('contact.message');
-Route::post('/contact/laptop-request', [ContactController::class, 'storeLaptopRequest'])->name('contact.laptop-request');
+    // Байланыс маршруттары
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact/message', [ContactController::class, 'storeContact'])->name('contact.message');
+    Route::post('/contact/laptop-request', [ContactController::class, 'storeLaptopRequest'])->name('contact.laptop-request');
 
-// Біз туралы бет
-Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+    // Біз туралы бет
+    Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 
-// Админ маршруттары
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    // Админ маршруттары
+
+// Админ маршруттары - 'admin' middleware-сіз
+    Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.index');
-    
+
+
     // Өнімдер
     Route::get('/products', [AdminProductController::class, 'index'])->name('admin.products.index');
     Route::get('/products/create', [AdminProductController::class, 'create'])->name('admin.products.create');

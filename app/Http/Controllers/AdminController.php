@@ -5,25 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Order;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
+    // Constructor әдісін қосамыз
     public function __construct()
     {
+        // Барлық әдістерге middleware қосамыз
         $this->middleware('auth');
-        // Middleware уақытша комментарийге аламыз
-        // $this->middleware('admin');
+        $this->middleware('admin');
     }
 
     public function dashboard()
     {
-        // Админдік тексеру
-        if (!Auth::check() || Auth::user()->role !== 'admin') {
-            return redirect('/')->with('error', 'Сізде админ құқығы жоқ!');
-        }
+        // Енді middleware тексергендіктен, қолмен тексеруді алып тастай аламыз
+        // if (!Auth::check()) {
+        //     return redirect()->route('login');
+        // }
+        //
+        // if (Auth::user()->role !== 'admin') {
+        //     return redirect()->route('home')->with('error', 'Сізде админ құқығы жоқ!');
+        // }
 
+        // Статистика
         $stats = [
             'total_users' => User::count(),
             'total_products' => Product::count(),
