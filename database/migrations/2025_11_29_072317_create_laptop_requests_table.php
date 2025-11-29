@@ -6,21 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('laptop_requests', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
+            $table->string('email', 100);
+            $table->string('phone', 20)->nullable();
+            $table->decimal('budget', 10, 2)->nullable();
+            $table->text('purpose')->nullable();
+            $table->text('specifications')->nullable();
+            $table->enum('status', ['new', 'processing', 'completed'])->default('new');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('laptop_requests');
     }
