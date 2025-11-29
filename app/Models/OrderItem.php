@@ -11,15 +11,14 @@ class OrderItem extends Model
 
     protected $fillable = [
         'order_id',
-        'product_id',
+        'product_id', 
         'quantity',
         'price'
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'quantity' => 'integer'
     ];
 
     public function order()
@@ -30,5 +29,20 @@ class OrderItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    public function getFormattedPriceAttribute()
+    {
+        return number_format($this->price, 0, ',', ' ') . ' ₸';
+    }
+
+    public function getTotalAttribute()
+    {
+        return $this->quantity * $this->price;
+    }
+
+    public function getFormattedTotalAttribute()
+    {
+        return number_format($this->total, 0, ',', ' ') . ' ₸';
     }
 }

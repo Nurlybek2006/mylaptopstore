@@ -11,7 +11,7 @@ class LaptopRequest extends Model
 
     protected $fillable = [
         'name',
-        'email',
+        'email', 
         'phone',
         'budget',
         'purpose',
@@ -22,6 +22,30 @@ class LaptopRequest extends Model
     protected $casts = [
         'budget' => 'decimal:2',
         'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
+
+    // Accessor - пішімделген бюджет
+    public function getFormattedBudgetAttribute()
+    {
+        return $this->budget ? number_format($this->budget, 0, ',', ' ') . ' ₸' : null;
+    }
+
+    // Accessor - статус атауы
+    public function getStatusLabelAttribute()
+    {
+        $statuses = [
+            'new' => 'Жаңа',
+            'processing' => 'Өңделуде',
+            'completed' => 'Аяқталған'
+        ];
+
+        return $statuses[$this->status] ?? $this->status;
+    }
+
+    // Scope - статус бойынша
+    public function scopeByStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
 }
