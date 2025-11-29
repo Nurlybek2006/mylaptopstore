@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController; // ← МІНДЕТТІ
 use Illuminate\Support\Facades\Route;
 
 // Аутентификация маршруттары
@@ -28,14 +29,12 @@ Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categ
 
 
 // Себет маршруттары
-Route::get('/cart', function () {
-    return view('cart.index');
-})->name('cart.index');
-
-Route::post('/cart/add/{product}', function ($productId) {
-    // Уақытша функция
-    return redirect()->back()->with('success', 'Өнім себетке қосылды');
-})->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/remove/{product}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
 // Профиль (уақытша)
 Route::get('/profile', function () {

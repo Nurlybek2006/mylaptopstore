@@ -36,7 +36,7 @@
                 @auth
                     <!-- Пайдаланушы функциялары -->
                     <a class="nav-link nav-item {{ request()->routeIs('cart') ? 'active' : '' }}" 
-                       href="{{ route('cart') }}">
+                       href="{{ route('cart.index') }}">
                         <i class="fas fa-shopping-cart me-1"></i>Себет
                     </a>
                     
