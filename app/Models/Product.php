@@ -23,6 +23,7 @@ class Product extends Model
 
     protected $casts = [
         'price' => 'decimal:2',
+        'stock' => 'integer', // Бұл жолды қосыңыз
         'specifications' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

@@ -70,6 +70,13 @@ use Illuminate\Support\Facades\Route;
 // Админ маршруттары - 'admin' middleware-сіз
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/categories', [CategoryController::class, 'adminIndex'])->name('admin.categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('admin.categories.store');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('admin.categories.edit');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('admin.categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+    Route::post('/categories/merge', [CategoryController::class, 'mergeCategories'])->name('admin.categories.merge');
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.index');
 
     // Өнімдер

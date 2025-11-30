@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kk">
+<html lang="kk" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,29 +37,6 @@
         
         .table-actions {
             white-space: nowrap;
-        }
-        
-        .form-container {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            margin-bottom: 2rem;
-        }
-        
-        .image-preview {
-            max-width: 200px;
-            max-height: 200px;
-            border-radius: 10px;
-            margin-top: 10px;
-            display: none;
-        }
-        
-        .tab-content {
-            border: 1px solid #dee2e6;
-            border-top: none;
-            padding: 1.5rem;
-            border-radius: 0 0 0.375rem 0.375rem;
         }
     </style>
 </head>
@@ -109,153 +86,21 @@
                     </a>
                 </div>
                 
-                <!-- Хабарламаларды көрсету -->
+                <!-- Хабарламалар -->
                 @if (session('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success alert-dismissible fade show">
                         {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 @endif
 
                 @if (session('error'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger alert-dismissible fade show">
                         {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 @endif
-                
-                @if ($action == 'add' || $action == 'edit')
-                <!-- Өнім қосу/өңдеу формасы -->
-                <div class="form-container">
-                    <h4>{{ $action == 'add' ? 'Жаңа өнім қосу' : 'Өнімді өңдеу' }}</h4>
-                    
-                    <form method="POST" 
-                          action="{{ $action == 'add' ? route('admin.products.store') : route('admin.products.update', $edit_product->id) }}" 
-                          enctype="multipart/form-data" 
-                          class="mt-4">
-                        @csrf
-                        @if($action == 'edit')
-                            @method('PUT')
-                        @endif
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Өнім атауы *</label>
-                                    <input type="text" name="name" class="form-control" 
-                                           value="{{ old('name', $edit_product->name ?? '') }}" required>
-                                    @error('name')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
                                 
-                                <div class="mb-3">
-                                    <label class="form-label">Бағасы (₸) *</label>
-                                    <input type="number" name="price" class="form-control" step="0.01" 
-                                           value="{{ old('price', $edit_product->price ?? '') }}" required>
-                                    @error('price')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label class="form-label">Қор саны *</label>
-                                    <input type="number" name="stock" class="form-control" 
-                                           value="{{ old('stock', $edit_product->stock ?? 0) }}" required>
-                                    @error('stock')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Категория</label>
-                                    <select name="category_id" class="form-select">
-                                        <option value="">Категория таңдаңыз</option>
-                                        @foreach($categories as $category)
-                                            <option value="{{ $category->id }}" 
-                                                {{ old('category_id', $edit_product->category_id ?? '') == $category->id ? 'selected' : '' }}>
-                                                {{ $category->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <!-- Сурет жүктеу табтары -->
-                                <div class="mb-3">
-                                    <label class="form-label">Сурет</label>
-                                    
-                                    <ul class="nav nav-tabs" id="imageTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="file-tab" data-bs-toggle="tab" data-bs-target="#file" type="button" role="tab">
-                                                <i class="fas fa-upload me-1"></i>Файл жүктеу
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="url-tab" data-bs-toggle="tab" data-bs-target="#url" type="button" role="tab">
-                                                <i class="fas fa-link me-1"></i>URL арқылы
-                                            </button>
-                                        </li>
-                                    </ul>
-                                    
-                                    <div class="tab-content" id="imageTabContent">
-                                        <div class="tab-pane fade show active" id="file" role="tabpanel">
-                                            <input type="file" name="image" class="form-control" accept="image/*" id="fileInput">
-                                            <div class="form-text">PNG, JPG, JPEG форматындағы суреттер (макс. 2MB)</div>
-                                            @error('image')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="tab-pane fade" id="url" role="tabpanel">
-                                            <input type="url" name="image_url" class="form-control" 
-                                                   placeholder="https://example.com/image.jpg" 
-                                                   value="{{ old('image_url', $edit_product->image ?? '') }}" 
-                                                   id="urlInput">
-                                            <div class="form-text">Интернеттегі суретке сілтеме</div>
-                                            <img src="" alt="URL суреті" class="image-preview" id="urlPreview">
-                                            @error('image_url')
-                                                <div class="text-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    
-                                    @if(isset($edit_product) && $edit_product->image)
-                                        <div class="mt-3">
-                                            <strong>Қазіргі сурет:</strong>
-                                            <div class="mt-2">
-                                                <img src="{{ $edit_product->image_url }}" 
-                                                     alt="Қазіргі сурет" class="product-image" style="width: 100px; height: 100px;">
-                                                <div class="form-text">
-                                                    {{ filter_var($edit_product->image, FILTER_VALIDATE_URL) ? 'URL суреті' : 'Жергілікті сурет' }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Сипаттама *</label>
-                            <textarea name="description" class="form-control" rows="4" required>{{ old('description', $edit_product->description ?? '') }}</textarea>
-                            @error('description')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        
-                        <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-save me-2"></i>
-                                {{ $action == 'add' ? 'Өнімді қосу' : 'Өзгерістерді сақтау' }}
-                            </button>
-                            <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">Болдырмау</a>
-                        </div>
-                    </form>
-                </div>
-                @endif
-                
                 <!-- Өнімдер кестесі -->
                 <div class="card">
                     <div class="card-header">
@@ -290,10 +135,16 @@
                                         @foreach($products as $product)
                                         <tr>
                                             <td>
+                                                @if($product->image_url)
                                                 <img src="{{ $product->image_url }}" 
                                                      alt="{{ $product->name }}" 
                                                      class="product-image"
-                                                     onerror="this.src='https://via.placeholder.com/60x60?text=No+Image'">
+                                                     onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0zMCAzNEMzMi4yMDkxIDM0IDM0IDMyLjIwOTEgMzQgMzBDMzQgMjcuNzkwOSAzMi4yMDkxIDI2IDMwIDI2QzI3Ljc5MDkgMjYgMjYgMjcuNzkwOSAyNiAzMEMyNiAzMi4yMDkxIDI3Ljc5MDkgMzQgMzAgMzRaIiBmaWxsPSIjOEU5MEEwIi8+CjxwYXRoIGQ9Ik0zNiAzNkgyNEwyOCAyOEwzMiAyNEwzNiAyOEw0MCAzMkwzNiAzNloiIGZpbGw9IiM4RTlBQTAiLz4KPC9zdmc+Cg=='">
+                                                @else
+                                                <div class="product-image bg-light d-flex align-items-center justify-content-center">
+                                                    <i class="fas fa-laptop text-muted"></i>
+                                                </div>
+                                                @endif
                                             </td>
                                             <td>
                                                 <strong>{{ $product->name }}</strong>
@@ -329,10 +180,12 @@
                                                     </a>
                                                     <form action="{{ route('admin.products.destroy', $product->id) }}" 
                                                           method="POST" 
-                                                          onsubmit="return confirm('Өнімді шынымен өшірейін бе?')">
+                                                          class="d-inline">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" title="Өшіру">
+                                                        <button type="submit" class="btn btn-danger" 
+                                                                title="Өшіру"
+                                                                onclick="return confirm('Өнімді шынымен өшірейін бе?')">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>
@@ -387,52 +240,5 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // URL суретін алдын ала көрсету
-        document.getElementById('urlInput')?.addEventListener('input', function() {
-            const preview = document.getElementById('urlPreview');
-            const url = this.value.trim();
-            
-            if (url && isValidUrl(url)) {
-                preview.src = url;
-                preview.style.display = 'block';
-            } else {
-                preview.style.display = 'none';
-            }
-        });
-
-        function isValidUrl(string) {
-            try {
-                new URL(string);
-                return true;
-            } catch (_) {
-                return false;
-            }
-        }
-
-        // Табтарды ауыстырғанда инпуттарды тазалау
-        document.getElementById('file-tab')?.addEventListener('click', function() {
-            const urlInput = document.getElementById('urlInput');
-            const urlPreview = document.getElementById('urlPreview');
-            if (urlInput) urlInput.value = '';
-            if (urlPreview) urlPreview.style.display = 'none';
-        });
-
-        document.getElementById('url-tab')?.addEventListener('click', function() {
-            const fileInput = document.getElementById('fileInput');
-            if (fileInput) fileInput.value = '';
-        });
-
-        // Егер URL суреті бар болса, алдын ала көрсету
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlInput = document.getElementById('urlInput');
-            const urlPreview = document.getElementById('urlPreview');
-            
-            if (urlInput && urlInput.value && isValidUrl(urlInput.value)) {
-                urlPreview.src = urlInput.value;
-                urlPreview.style.display = 'block';
-            }
-        });
-    </script>
 </body>
 </html>

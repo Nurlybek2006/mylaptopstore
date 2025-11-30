@@ -16,26 +16,25 @@ class AdminProductController extends Controller
         $this->middleware('admin');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $action = $request->get('action', '');
-        $product_id = $request->get('id', 0);
-
         // Өнімдер тізімін алу - user байланысын пайдаланамыз
-        $products = Product::with('user')
+        $products = Product::with(['user', 'category'])
             ->orderBy('created_at', 'desc')
             ->get();
-
-        // Өңделетін өнімді алу
-        $edit_product = null;
-        if ($action == 'edit' && $product_id > 0) {
-            $edit_product = Product::find($product_id);
-        }
 
         // Категорияларды алу (формада қажет)
         $categories = Category::all();
 
-        return view('admin.products.index', compact('products', 'action', 'edit_product', 'categories'));
+        // Статистика
+        $stats = [
+            'total_products' => $products->count(),
+            'available_products' => $products->where('stock', '>', 0)->count(),
+            'out_of_stock' => $products->where('stock', 0)->count(),
+            'average_price' => $products->avg('price')
+        ];
+
+        return view('admin.products.index', compact('products', 'categories', 'stats'));
     }
 
     public function create()
