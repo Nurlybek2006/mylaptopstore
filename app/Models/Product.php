@@ -18,15 +18,24 @@ class Product extends Model
         'image', 
         'stock', 
         'specifications', 
-        'created_by'
+        'created_by',
+        'views' // Ескі кодта көру саны бар еді
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
-        'stock' => 'integer', // Бұл жолды қосыңыз
+        'stock' => 'integer',
         'specifications' => 'array',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+    ];
+
+    protected $appends = [
+        'image_url',
+        'short_description',
+        'formatted_price',
+        'in_stock',
+        'stock_status'
     ];
 
     // Байланыстар
@@ -58,10 +67,10 @@ class Product extends Model
 
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasManyThrough(Order::class, OrderItem::class);
     }
 
-    // Accessor - суреттің толық URL-ін алу
+    // Accessor - суреттің толық URL-ін алу (ескі кодқа сәйкес)
     public function getImageUrlAttribute()
     {
         if (!$this->image) {
@@ -73,23 +82,32 @@ class Product extends Model
             return $this->image;
         }
 
-        // Егер сурет жергілікті файл болса
-        return asset('storage/' . $this->image);
+        // Егер сурет жергілікті файл болса - storage папкасынан
+        if (Storage::disk('public')->exists($this->image)) {
+            return asset('storage/' . $this->image);
+        }
+
+        // Егер uploads папкасында болса (ескі кодқа сәйкес)
+        if (file_exists(public_path('uploads/' . $this->image))) {
+            return asset('uploads/' . $this->image);
+        }
+
+        return asset('images/default-product.jpg');
     }
 
     // Accessor - қысқаша сипаттама
     public function getShortDescriptionAttribute()
     {
-        return \Illuminate\Support\Str::limit($this->description, 100);
+        return \Illuminate\Support\Str::limit(strip_tags($this->description), 100);
     }
 
-    // Accessor - пішімделген баға
+    // Accessor - пішімделген баға (ескі кодтағы сияқты)
     public function getFormattedPriceAttribute()
     {
         return number_format($this->price, 0, ',', ' ') . ' ₸';
     }
 
-    // Статус тексеру
+    // Статус тексеру (ескі кодтағы сияқты)
     public function getInStockAttribute()
     {
         return $this->stock > 0;
@@ -97,7 +115,37 @@ class Product extends Model
 
     public function getStockStatusAttribute()
     {
-        return $this->stock > 0 ? 'Сатылымда' : 'Сатылымнан шығарылған';
+        if ($this->stock > 10) {
+            return 'Қоймада бар';
+        } elseif ($this->stock > 0) {
+            return 'Аз қалды';
+        } else {
+            return 'Сатылымда жоқ';
+        }
+    }
+
+    // Ескі кодтағы getProductImage функциясына сәйкес
+    public function getProductImage($imagePath = null)
+    {
+        $image = $imagePath ?: $this->image;
+        
+        if (!$image) {
+            return asset('images/default-product.jpg');
+        }
+
+        if (filter_var($image, FILTER_VALIDATE_URL)) {
+            return $image;
+        }
+
+        if (Storage::disk('public')->exists($image)) {
+            return asset('storage/' . $image);
+        }
+
+        if (file_exists(public_path('uploads/' . $image))) {
+            return asset('uploads/' . $image);
+        }
+
+        return asset('images/default-product.jpg');
     }
 
     // Scope - тек қолжетімді өнімдер
@@ -118,6 +166,18 @@ class Product extends Model
         return $query->whereBetween('price', [$minPrice, $maxPrice]);
     }
 
+    // Scope - іздеу бойынша (ескі кодтағы сияқты)
+    public function scopeSearch($query, $searchTerm)
+    {
+        return $query->where(function($q) use ($searchTerm) {
+            $q->where('name', 'like', "%{$searchTerm}%")
+              ->orWhere('description', 'like', "%{$searchTerm}%")
+              ->orWhereHas('category', function($categoryQuery) use ($searchTerm) {
+                  $categoryQuery->where('name', 'like', "%{$searchTerm}%");
+              });
+        });
+    }
+
     // Өнімді жасаған пайдаланушы админ бе?
     public function getIsCreatedByAdminAttribute()
     {
@@ -130,10 +190,58 @@ class Product extends Model
         return $this->orders()->where('status', 'completed')->sum('total_amount');
     }
 
-    // Өнімнің орташа рейтингі (келешекте рейтинг жүйесі қосылса)
+    // Өнімнің орташа рейтингі (ескі кодта 4.5 көрсетілген)
     public function getAverageRatingAttribute()
     {
-        // Келешекте рейтинг жүйесі үшін
-        return 0;
+        // Уақытша тіркелген мән - ескі кодта 4.5 көрсетілген
+        return 4.5;
+    }
+
+    // Пікірлер саны (ескі кодта 128 көрсетілген)
+    public function getReviewsCountAttribute()
+    {
+        // Уақытша тіркелген мән
+        return 128;
+    }
+
+    // Ұқсас өнімдерді алу (ескі кодтағы сияқты)
+    public function getRelatedProducts($limit = 4)
+    {
+        return self::where('category_id', $this->category_id)
+                  ->where('id', '!=', $this->id)
+                  ->where('stock', '>', 0)
+                  ->limit($limit)
+                  ->get();
+    }
+
+    // Көру санын арттыру (ескі кодтағы сияқты)
+    public function incrementViews()
+    {
+        $this->increment('views');
+        return $this;
+    }
+
+    // Өнімді себетке қосуға болады ма?
+    public function getCanAddToCartAttribute()
+    {
+        return $this->in_stock && auth()->check();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($product) {
+            if (auth()->check()) {
+                $product->created_by = auth()->id();
+            }
+        });
+
+        static::deleting(function ($product) {
+            // Өнім суретін жою
+            if ($product->image && !filter_var($product->image, FILTER_VALIDATE_URL)) {
+                Storage::disk('public')->delete($product->image);
+            }
+        });
     }
 }
