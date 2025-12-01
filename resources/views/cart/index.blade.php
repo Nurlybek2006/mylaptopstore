@@ -95,6 +95,70 @@
             background: #fef2f2;
             border: 1px solid #fecaca;
         }
+        
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0.5rem;
+        }
+        
+        .payment-method {
+            font-size: 1.5rem;
+            color: #64748b;
+        }
+        
+        .stripe-info {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            border: none;
+            padding: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            flex: 1;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
+            color: white;
+        }
+        
+        .btn-loading {
+            position: relative;
+            color: transparent !important;
+        }
+        
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -235,14 +299,39 @@
                         </div>
                     @endif
                     
-                    <form method="POST" action="{{ route('cart.checkout') }}">
+                    <!-- Кәдімгі тапсырыс беру формасы -->
+                    <form method="POST" action="{{ route('cart.checkout') }}" class="mb-3">
                         @csrf
                         <button type="submit" class="btn btn-primary w-100 py-3"
                                 {{ $has_out_of_stock ? 'disabled' : '' }}>
                             <i class="fas fa-credit-card me-2"></i>
-                            Тапсырыс беру
+                            Кәдімгі тапсырыс беру
                         </button>
                     </form>
+                    
+                    <!-- Stripe арқылы төлеу -->
+                    <button type="button" class="btn btn-success w-100 py-3 mb-3" 
+                            id="stripeCartBtn"
+                            onclick="stripeCartCheckout()"
+                            {{ $has_out_of_stock ? 'disabled' : '' }}>
+                        <i class="fas fa-bolt me-2"></i>
+                        Stripe арқылы төлеу
+                    </button>
+                    
+                    <!-- Stripe төлем ақпараты -->
+                    <div class="stripe-info">
+                        <p class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-shield-alt me-1"></i>
+                                Қауіпсіз төлем - Stripe
+                            </small>
+                        </p>
+                        <div class="payment-methods">
+                            <span class="payment-method">💳</span>
+                            <span class="payment-method">🔒</span>
+                            <span class="payment-method">⚡</span>
+                        </div>
+                    </div>
                     
                     <div class="mt-3 text-center">
                         <a href="{{ route('products.index') }}" class="text-decoration-none">
@@ -255,6 +344,71 @@
         </div>
     </div>
 
+    <!-- Stripe JS -->
+    <script src="https://js.stripe.com/v3/"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Stripe баптау
+        const stripe = Stripe('{{ config("services.stripe.key") }}');
+        
+        // Себетті Stripe арқылы төлеу функциясы
+        async function stripeCartCheckout() {
+            const button = document.getElementById('stripeCartBtn');
+            const originalText = button.innerHTML;
+            
+            // Жүктелу күйін көрсету
+            button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Жүктелуде...';
+            button.classList.add('btn-loading');
+            button.disabled = true;
+            
+            try {
+                const response = await fetch('{{ route("cart.stripe-checkout") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({})
+                });
+                
+                const data = await response.json();
+                
+                if (data.id) {
+                    // Stripe Checkout-қа бағыттау
+                    const result = await stripe.redirectToCheckout({
+                        sessionId: data.id
+                    });
+                    
+                    if (result.error) {
+                        alert('Төлем қатесі: ' + result.error.message);
+                    }
+                } else {
+                    alert('Қате: ' + data.error);
+                }
+            } catch (error) {
+                alert('Желі қатесі: ' + error.message);
+                console.error('Stripe қатесі:', error);
+            } finally {
+                // Батырманы қалпына келтіру
+                button.innerHTML = originalText;
+                button.classList.remove('btn-loading');
+                button.disabled = false;
+            }
+        }
+        
+        // Хабарламаларды автоматты түрде жабу
+        document.addEventListener('DOMContentLoaded', function() {
+            // 5 секундтан кейін барлық хабарламаларды жабу
+            setTimeout(function() {
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(function(alert) {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                });
+            }, 5000);
+        });
+    </script>
 </body>
 </html>

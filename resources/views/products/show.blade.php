@@ -13,42 +13,42 @@
         --light: #f8fafc;
         --dark: #1e293b;
     }
-    
+
     .product-main {
         background: white;
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         margin-bottom: 3rem;
     }
-    
+
     .product-gallery {
         padding: 2rem;
         background: var(--light);
     }
-    
+
     .main-image {
         border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         margin-bottom: 1rem;
     }
-    
+
     .main-image img {
         width: 100%;
         height: 400px;
         object-fit: cover;
         transition: transform 0.3s ease;
     }
-    
+
     .main-image:hover img {
         transform: scale(1.02);
     }
-    
+
     .product-info {
         padding: 2rem;
     }
-    
+
     .product-category {
         color: var(--primary);
         font-weight: 600;
@@ -57,7 +57,7 @@
         letter-spacing: 0.5px;
         margin-bottom: 0.5rem;
     }
-    
+
     .product-title {
         font-size: 2rem;
         font-weight: 700;
@@ -65,23 +65,23 @@
         margin-bottom: 1rem;
         line-height: 1.2;
     }
-    
+
     .product-rating {
         display: flex;
         align-items: center;
         margin-bottom: 1.5rem;
     }
-    
+
     .stars {
         color: var(--accent);
         margin-right: 0.5rem;
     }
-    
+
     .rating-text {
         color: var(--secondary);
         font-size: 0.9rem;
     }
-    
+
     .price-section {
         background: linear-gradient(135deg, var(--light) 0%, #fff 100%);
         padding: 1.5rem;
@@ -89,21 +89,21 @@
         margin-bottom: 1.5rem;
         border: 2px solid #e2e8f0;
     }
-    
+
     .current-price {
         font-size: 2.5rem;
         font-weight: 700;
         color: var(--primary);
         line-height: 1;
     }
-    
+
     .price-label {
         color: var(--secondary);
         font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
-    
+
     .stock-info {
         display: flex;
         align-items: center;
@@ -112,34 +112,34 @@
         border-radius: 10px;
         background: var(--light);
     }
-    
+
     .stock-badge {
         padding: 0.5rem 1rem;
         border-radius: 25px;
         font-weight: 600;
         font-size: 0.9rem;
     }
-    
+
     .in-stock {
         background: #dcfce7;
         color: #166534;
     }
-    
+
     .out-of-stock {
         background: #fee2e2;
         color: #dc2626;
     }
-    
+
     .stock-count {
         margin-left: auto;
         color: var(--secondary);
         font-size: 0.9rem;
     }
-    
+
     .description-section {
         margin-bottom: 2rem;
     }
-    
+
     .section-title {
         font-size: 1.3rem;
         font-weight: 600;
@@ -148,33 +148,33 @@
         padding-bottom: 0.5rem;
         border-bottom: 2px solid var(--primary);
     }
-    
+
     .product-description {
         line-height: 1.7;
         color: var(--secondary);
         font-size: 1rem;
     }
-    
+
     .purchase-section {
         background: var(--light);
         padding: 1.5rem;
         border-radius: 15px;
         border: 2px solid #e2e8f0;
     }
-    
+
     .quantity-selector {
         display: flex;
         align-items: center;
         gap: 1rem;
         margin-bottom: 1.5rem;
     }
-    
+
     .quantity-label {
         font-weight: 600;
         color: var(--dark);
         min-width: 80px;
     }
-    
+
     .quantity-input {
         width: 100px;
         text-align: center;
@@ -183,13 +183,13 @@
         padding: 0.5rem;
         font-weight: 600;
     }
-    
+
     .action-buttons {
         display: flex;
         gap: 1rem;
         flex-direction: column;
     }
-    
+
     .btn-primary {
         background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
         border: none;
@@ -205,13 +205,13 @@
         justify-content: center;
         gap: 0.5rem;
     }
-    
+
     .btn-primary:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
         color: white;
     }
-    
+
     .btn-outline {
         background: transparent;
         border: 2px solid var(--primary);
@@ -227,7 +227,7 @@
         justify-content: center;
         gap: 0.5rem;
     }
-    
+
     .btn-outline:hover {
         background: var(--primary);
         color: white;
@@ -249,17 +249,38 @@
         justify-content: center;
         gap: 0.5rem;
     }
-    
+
     .btn-success:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
         color: white;
     }
-    
+
+    .stripe-info {
+        text-align: center;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8fafc;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .payment-methods {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 0.5rem;
+    }
+
+    .payment-method {
+        font-size: 1.5rem;
+        color: #64748b;
+    }
+
     .related-products {
         margin-top: 4rem;
     }
-    
+
     .related-title {
         font-size: 1.8rem;
         font-weight: 700;
@@ -268,7 +289,7 @@
         text-align: center;
         position: relative;
     }
-    
+
     .related-title::after {
         content: '';
         position: absolute;
@@ -280,42 +301,42 @@
         background: var(--accent);
         border-radius: 2px;
     }
-    
+
     .related-card {
         border: none;
         border-radius: 15px;
         overflow: hidden;
         transition: all 0.3s ease;
         background: white;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         height: 100%;
     }
-    
+
     .related-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
-    
+
     .related-image {
         height: 180px;
         overflow: hidden;
     }
-    
+
     .related-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 0.3s ease;
     }
-    
+
     .related-card:hover .related-image img {
         transform: scale(1.1);
     }
-    
+
     .related-body {
         padding: 1.5rem;
     }
-    
+
     .related-name {
         font-size: 1.1rem;
         font-weight: 600;
@@ -323,14 +344,14 @@
         margin-bottom: 0.5rem;
         line-height: 1.4;
     }
-    
+
     .related-price {
         font-size: 1.2rem;
         font-weight: 700;
         color: var(--primary);
         margin-bottom: 1rem;
     }
-    
+
     .btn-related {
         background: var(--primary);
         border: none;
@@ -344,7 +365,7 @@
         display: block;
         text-align: center;
     }
-    
+
     .btn-related:hover {
         background: var(--primary-dark);
         color: white;
@@ -355,7 +376,7 @@
         position: relative;
         color: transparent !important;
     }
-    
+
     .btn-loading::after {
         content: '';
         position: absolute;
@@ -366,10 +387,15 @@
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }
-    
+
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
     }
 </style>
 @endsection
@@ -382,7 +408,7 @@
             <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home me-1"></i>Басты бет</a></li>
             <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Өнімдер</a></li>
             @if($product->category)
-                <li class="breadcrumb-item"><a href="{{ route('categories.show', $product->category->id) }}">{{ $product->category->name }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('categories.show', $product->category->id) }}">{{ $product->category->name }}</a></li>
             @endif
             <li class="breadcrumb-item active">{{ $product->name }}</li>
         </ol>
@@ -395,9 +421,9 @@
             <div class="col-lg-6">
                 <div class="product-gallery">
                     <div class="main-image">
-                        <img src="{{ $product->image_url }}" 
-                             alt="{{ $product->name }}" 
-                             id="mainImage">
+                        <img src="{{ $product->image_url }}"
+                            alt="{{ $product->name }}"
+                            id="mainImage">
                     </div>
                 </div>
             </div>
@@ -408,9 +434,9 @@
                     <div class="product-category">
                         <i class="fas fa-tag me-1"></i>{{ $product->category->name ?? 'Категория жоқ' }}
                     </div>
-                    
+
                     <h1 class="product-title">{{ $product->name }}</h1>
-                    
+
                     <div class="product-rating">
                         <div class="stars">
                             <i class="fas fa-star"></i>
@@ -429,14 +455,14 @@
 
                     <div class="stock-info">
                         @if($product->in_stock)
-                            <span class="stock-badge in-stock">
-                                <i class="fas fa-check me-1"></i>{{ $product->stock_status }}
-                            </span>
-                            <span class="stock-count">{{ $product->stock }} дана қалды</span>
+                        <span class="stock-badge in-stock">
+                            <i class="fas fa-check me-1"></i>{{ $product->stock_status }}
+                        </span>
+                        <span class="stock-count">{{ $product->stock }} дана қалды</span>
                         @else
-                            <span class="stock-badge out-of-stock">
-                                <i class="fas fa-times me-1"></i>{{ $product->stock_status }}
-                            </span>
+                        <span class="stock-badge out-of-stock">
+                            <i class="fas fa-times me-1"></i>{{ $product->stock_status }}
+                        </span>
                         @endif
                     </div>
 
@@ -457,36 +483,56 @@
                                 <select name="quantity" id="quantity" class="form-select quantity-input">
                                     @for($i = 1; $i <= min(10, $product->stock); $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
-                                    @endfor
+                                        @endfor
                                 </select>
                             </div>
-                            
+
                             <div class="action-buttons">
                                 @auth
-                                    @if(Auth::user()->role !== 'admin')
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="fas fa-shopping-cart me-2"></i>Себетке қосу
-                                        </button>
-                                        
-                                        <a href="{{ route('cart.index') }}" class="btn btn-outline">
-                                            <i class="fas fa-credit-card me-2"></i>Себетте төлеу
-                                        </a>
-                                    @else
-                                        <div class="alert alert-warning text-center">
-                                            <i class="fas fa-info-circle me-2"></i>
-                                            Админ себетке өнім қоса алмайды
-                                        </div>
-                                    @endif
+                                @if(Auth::user()->role !== 'admin')
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-shopping-cart me-2"></i>Себетке қосу
+                                </button>
+
+                                <!-- Stripe арқылы бірден сатып алу батырмасы -->
+                                <button type="button" class="btn btn-success stripe-checkout-btn" data-product-id="{{ $product->id }}" id="stripeBtn">
+                                    <i class="fas fa-bolt me-2"></i>Stripe арқылы сатып алу
+                                </button>
+
+                                <a href="{{ route('cart.index') }}" class="btn btn-outline">
+                                    <i class="fas fa-credit-card me-2"></i>Себетте төлеу
+                                </a>
                                 @else
-                                    <a href="{{ route('login') }}" class="btn btn-primary">
-                                        <i class="fas fa-sign-in-alt me-2"></i>Кіру (сатып алу үшін)
-                                    </a>
-                                    <a href="{{ route('register') }}" class="btn btn-outline">
-                                        <i class="fas fa-user-plus me-2"></i>Тіркелу
-                                    </a>
+                                <div class="alert alert-warning text-center">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Админ себетке өнім қоса алмайды
+                                </div>
+                                @endif
+                                @else
+                                <a href="{{ route('login') }}" class="btn btn-primary">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Кіру (сатып алу үшін)
+                                </a>
+                                <a href="{{ route('register') }}" class="btn btn-outline">
+                                    <i class="fas fa-user-plus me-2"></i>Тіркелу
+                                </a>
                                 @endauth
                             </div>
                         </form>
+
+                        <!-- Stripe төлем ақпараты -->
+                        <div class="stripe-info">
+                            <p class="mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-shield-alt me-1"></i>
+                                    Қауіпсіз төлем - Stripe
+                                </small>
+                            </p>
+                            <div class="payment-methods">
+                                <span class="payment-method">💳</span>
+                                <span class="payment-method">🔒</span>
+                                <span class="payment-method">⚡</span>
+                            </div>
+                        </div>
                     </div>
                     @else
                     <div class="alert alert-warning text-center">
@@ -508,8 +554,8 @@
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="related-card">
                     <div class="related-image">
-                        <img src="{{ $related->image_url }}" 
-                             alt="{{ $related->name }}">
+                        <img src="{{ $related->image_url }}"
+                            alt="{{ $related->name }}">
                     </div>
                     <div class="related-body">
                         <h4 class="related-name">{{ $related->name }}</h4>
@@ -528,15 +574,16 @@
 @endsection
 
 @section('scripts')
+<script src="https://js.stripe.com/v3/"></script>
 <script>
     // Анимация эффектілері
     document.addEventListener('DOMContentLoaded', function() {
         const elements = document.querySelectorAll('.product-main, .related-card');
-        
+
         elements.forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
-            
+
             setTimeout(() => {
                 element.style.transition = 'all 0.6s ease';
                 element.style.opacity = '1';
@@ -565,6 +612,67 @@
                 bsAlert.close();
             });
         }, 5000);
+    });
+
+    // Stripe баптау
+    const stripe = Stripe('{{ config("services.stripe.key") }}');
+
+    // Stripe төлем функциясы
+    async function stripeCheckout(productId) {
+        const quantity = document.getElementById('quantity').value;
+        const button = document.getElementById('stripeBtn');
+        const originalText = button.innerHTML;
+
+        // Жүктелу күйін көрсету
+        button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Жүктелуде...';
+        button.classList.add('btn-loading');
+        button.disabled = true;
+
+        try {
+            const response = await fetch('{{ route("stripe.checkout") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    quantity: parseInt(quantity)
+                })
+            });
+
+            const data = await response.json();
+
+            if (data.id) {
+                // Stripe Checkout-қа бағыттау
+                const result = await stripe.redirectToCheckout({
+                    sessionId: data.id
+                });
+
+                if (result.error) {
+                    alert('Төлем қатесі: ' + result.error.message);
+                }
+            } else {
+                alert('Қате: ' + data.error);
+            }
+        } catch (error) {
+            alert('Желі қатесі: ' + error.message);
+            console.error('Stripe қатесі:', error);
+        } finally {
+            // Батырманы қалпына келтіру
+            button.innerHTML = originalText;
+            button.classList.remove('btn-loading');
+            button.disabled = false;
+        }
+    }
+    // Батырмаларға event listener қосу
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.stripe-checkout-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-product-id');
+                stripeCheckout(productId);
+            });
+        });
     });
 </script>
 @endsection
