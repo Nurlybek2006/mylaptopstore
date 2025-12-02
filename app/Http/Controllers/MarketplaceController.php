@@ -182,7 +182,23 @@ class MarketplaceController extends Controller
             ->limit(4)
             ->get();
 
-        return view('marketplace.show', compact('product', 'similarProducts'));
+        // Белгілі бір тауар бойынша чат хабарламаларын алу
+        $chatMessages = [];
+        if (auth()->check() && auth()->id() != $product->user_id) {
+            $chatMessages = MarketplaceMessage::with('sender')
+                ->where('product_id', $product->id)
+                ->where(function ($query) use ($product) {
+                    $query->where('sender_id', auth()->id())
+                        ->where('receiver_id', $product->user_id);
+                })->orWhere(function ($query) use ($product) {
+                    $query->where('sender_id', $product->user_id)
+                        ->where('receiver_id', auth()->id());
+                })
+                ->orderBy('created_at', 'asc')
+                ->get();
+        }
+
+        return view('marketplace.show', compact('product', 'similarProducts', 'chatMessages'));
     }
 
     /**
@@ -465,5 +481,40 @@ class MarketplaceController extends Controller
             'success' => true,
             'message' => $message
         ]);
+    }
+
+    /**
+     * Тауар бойынша хабарлама жіберу
+     */
+    public function sendProductMessage(Request $request, $id)
+    {
+        $product = MarketplaceProduct::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'message' => 'required|string|max:1000'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Өзінің өніміне хабарлама жібере алмау
+        if ($product->user_id == Auth::id()) {
+            return redirect()->back()
+                ->with('error', 'Өзіңіздің өніміңізге хабарлама жібере алмайсыз');
+        }
+
+        MarketplaceMessage::create([
+            'sender_id' => Auth::id(),
+            'receiver_id' => $product->user_id,
+            'product_id' => $product->id,
+            'message' => $request->message,
+            'is_read' => false
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Хабарлама жіберілді!');
     }
 }

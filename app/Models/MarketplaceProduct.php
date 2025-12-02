@@ -94,4 +94,30 @@ class MarketplaceProduct extends Model
     {
         return $this->user_id == $userId;
     }
+
+    // app/Models/MarketplaceProduct.php
+    public function getInterestsCountAttribute()
+    {
+        return $this->interests()->count();
+    }
+
+    public function getImagesAttribute($value)
+    {
+        if (empty($value)) {
+            return [];
+        }
+
+        if (is_array($value)) {
+            return $value;
+        }
+
+        // Егер JSON болса
+        $decoded = json_decode($value, true);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            return $decoded;
+        }
+
+        // Егер comma separated болса
+        return array_map('trim', explode(',', $value));
+    }
 }

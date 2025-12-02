@@ -124,6 +124,12 @@ Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->withoutMid
 Route::prefix('marketplace')->name('marketplace.')->group(function () {
     // Басты бет
     Route::get('/', [MarketplaceController::class, 'index'])->name('index');
+
+        // Тауар бойынша хабарлама жіберу
+    Route::middleware(['auth'])->post('/product/{id}/message', [MarketplaceController::class, 'sendProductMessage'])->name('send-product-message');
+
+        // Тауарды көрсету
+    Route::get('/product/{id}', [MarketplaceController::class, 'show'])->name('show');
     
     // Тауарды көрсету
     Route::get('/product/{product}', [MarketplaceController::class, 'show'])->name('show');
