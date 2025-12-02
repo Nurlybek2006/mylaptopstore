@@ -1,4 +1,5 @@
 <?php
+// 2025_11_29_072318_create_marketplace_products_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'sold', 'inactive'])->default('active');
             $table->integer('views')->default(0);
             $table->timestamps();
+            $table->softDeletes(); // Жұмсақ жою үшін қосу
         });
     }
 

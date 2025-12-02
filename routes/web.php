@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\MarketplaceController;
 use Illuminate\Support\Facades\Route;
 
 // Аутентификация маршруттары
@@ -118,3 +119,33 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
 // Webhook (CSRF қорғаныссыз) - бұл жеке жолға қою керек
 Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+// Marketplace маршруттары
+Route::prefix('marketplace')->name('marketplace.')->group(function () {
+    // Басты бет
+    Route::get('/', [MarketplaceController::class, 'index'])->name('index');
+    
+    // Тауарды көрсету
+    Route::get('/product/{product}', [MarketplaceController::class, 'show'])->name('show');
+    
+    // Аутентификация қажет маршруттар
+    Route::middleware(['auth'])->group(function () {
+        // Тауар операциялары
+        Route::get('/add', [MarketplaceController::class, 'create'])->name('create');
+        Route::post('/add', [MarketplaceController::class, 'store'])->name('store');
+        Route::get('/my-products', [MarketplaceController::class, 'myProducts'])->name('myProducts');
+        Route::get('/edit/{product}', [MarketplaceController::class, 'edit'])->name('edit');
+        Route::put('/update/{product}', [MarketplaceController::class, 'update'])->name('update');
+        Route::delete('/delete/{product}', [MarketplaceController::class, 'destroy'])->name('destroy');
+        
+        // Хабарлама операциялары
+        Route::post('/send-message', [MarketplaceController::class, 'sendMessage'])->name('sendMessage');
+        Route::post('/interest/{product}', [MarketplaceController::class, 'addInterest'])->name('addInterest');
+        
+        // Чат операциялары
+        Route::get('/chats', [MarketplaceController::class, 'chats'])->name('chats');
+        Route::get('/chat/{user}', [MarketplaceController::class, 'chat'])->name('chat');
+        Route::get('/messages/{user}', [MarketplaceController::class, 'getMessages'])->name('getMessages');
+        Route::post('/send-chat-message', [MarketplaceController::class, 'sendChatMessage'])->name('sendChatMessage');
+    });
+});

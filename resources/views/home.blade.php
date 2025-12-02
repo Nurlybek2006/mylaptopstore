@@ -783,7 +783,7 @@
                         <p class="marketplace-text">
                             Ноутбук сатқыңыз келе ме? Біздің маркетплейс арқылы оңай сатыңыз!
                         </p>
-                        <a href="{{ route('marketplace') }}" class="btn btn-marketplace">
+                        <a href="{{ route('marketplace.index') }}" class="btn btn-marketplace">
                             <i class="fas fa-store me-2"></i>
                             MarketPlace
                         </a>

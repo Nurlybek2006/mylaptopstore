@@ -30,7 +30,7 @@
                     <li><a href="{{ route('products.index') }}">Ноутбуктер</a></li>
                     <li><a href="{{ route('about.index') }}">Біз туралы</a></li>
                     <li><a href="{{ route('contact.index') }}">Байланыс</a></li>
-                    <li><a href="{{ route('marketplace') }}">MarketPlace</a></li>
+                    <li><a href="{{ route('marketplace.index') }}">MarketPlace</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 mb-4">
