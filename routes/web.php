@@ -142,12 +142,16 @@ Route::prefix('marketplace')->name('marketplace.')->group(function () {
         Route::get('/my-products', [MarketplaceController::class, 'myProducts'])->name('myProducts');
         Route::post('/product/{id}/status', [MarketplaceController::class, 'updateStatus'])->name('update-status');
         Route::get('/edit/{product}', [MarketplaceController::class, 'edit'])->name('edit');
+        Route::post('/message/send', [MarketplaceController::class, 'sendMessage'])->name('sendMessage');
+
         Route::put('/update/{product}', [MarketplaceController::class, 'update'])->name('update');
         Route::delete('/delete/{product}', [MarketplaceController::class, 'destroy'])->name('destroy');
         
         // Хабарлама операциялары
         Route::post('/send-message', [MarketplaceController::class, 'sendMessage'])->name('sendMessage');
         Route::post('/interest/{product}', [MarketplaceController::class, 'addInterest'])->name('addInterest');
+        Route::post('/marketplace/chat/send-message', [MarketplaceController::class, 'sendChatMessage'])->name('marketplace.sendChatMessage');
+
         
         // Чат операциялары
         Route::get('/chats', [MarketplaceController::class, 'chats'])->name('chats');
