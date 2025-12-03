@@ -126,4 +126,8 @@ return [
         'table' => 'failed_jobs',
     ],
 
+    'openai' => [
+        'api_key' => env('OPENAI_API_KEY'),
+    ],
+
 ];

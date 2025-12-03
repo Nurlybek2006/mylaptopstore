@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\MarketplaceController;
+use App\Http\Controllers\ChatbotController;
 use Illuminate\Support\Facades\Route;
 
 // Аутентификация маршруттары
@@ -29,6 +30,15 @@ Route::middleware(['auth'])->post('/logout', [AuthController::class, 'logout'])-
 
 // Басты бет
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Бот болмайтын беттер:
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index'); // ❌ бот жоқ
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index'); // ❌ бот жоқ
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index'); // ❌ бот жоқ
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); // ❌ бот жоқ
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register'); // ❌ бот жоқ
+Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard'); // ❌ бот жоқ
+
 
 // Продуктілер
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -160,3 +170,11 @@ Route::prefix('marketplace')->name('marketplace.')->group(function () {
         Route::post('/send-chat-message', [MarketplaceController::class, 'sendChatMessage'])->name('sendChatMessage');
     });
 });
+
+// Бот-консультант маршруттары
+Route::prefix('chatbot')->group(function () {
+    Route::post('/chat', [ChatbotController::class, 'chat'])->name('chatbot.chat');
+    Route::post('/email', [ChatbotController::class, 'sendEmail'])->name('chatbot.email');
+});
+
+
