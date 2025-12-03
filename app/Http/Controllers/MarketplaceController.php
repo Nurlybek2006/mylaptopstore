@@ -288,22 +288,17 @@ class MarketplaceController extends Controller
 
         $product->delete();
 
+        if (request()->ajax() || request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Тауар сәтті жойылды!'
+            ]);
+        }
+
         return redirect()->route('marketplace.myProducts')
             ->with('success', 'Тауар сәтті жойылды!');
     }
 
-    /**
-     * Менің тауарларым
-     */
-    public function myProducts()
-    {
-        $products = MarketplaceProduct::withCount('interests')
-            ->where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->paginate(12);
-
-        return view('marketplace.my-products', compact('products'));
-    }
 
     /**
      * Хабарлама жіберу
@@ -516,5 +511,69 @@ class MarketplaceController extends Controller
 
         return redirect()->back()
             ->with('success', 'Хабарлама жіберілді!');
+    }
+
+    /**
+     * Менің тауарларым
+     */
+    public function myProducts(Request $request)
+    {
+        $query = MarketplaceProduct::withCount('interests')
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc');
+
+        // Сүзгілер
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhere('category', 'like', '%' . $search . '%');
+            });
+        }
+
+        $products = $query->paginate(12);
+
+        // Статистиканы есептеу
+        $stats = [
+            'total' => MarketplaceProduct::where('user_id', Auth::id())->count(),
+            'active' => MarketplaceProduct::where('user_id', Auth::id())->where('status', 'active')->count(),
+            'sold' => MarketplaceProduct::where('user_id', Auth::id())->where('status', 'sold')->count(),
+            'inactive' => MarketplaceProduct::where('user_id', Auth::id())->where('status', 'inactive')->count(),
+            'total_views' => MarketplaceProduct::where('user_id', Auth::id())->sum('views'),
+        ];
+
+        return view('marketplace.my-products', compact('products', 'stats'));
+    }
+
+    /**
+     * Тауар статусын өзгерту
+     */
+    public function updateStatus(Request $request, $id)
+    {
+        $product = MarketplaceProduct::where('user_id', Auth::id())
+            ->findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:active,sold,inactive'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Жарамсыз статус'
+            ], 422);
+        }
+
+        $product->update(['status' => $request->status]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Тауар статусы сәтті өзгертілді!'
+        ]);
     }
 }

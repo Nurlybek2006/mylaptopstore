@@ -140,6 +140,7 @@ Route::prefix('marketplace')->name('marketplace.')->group(function () {
         Route::get('/add', [MarketplaceController::class, 'create'])->name('create');
         Route::post('/add', [MarketplaceController::class, 'store'])->name('store');
         Route::get('/my-products', [MarketplaceController::class, 'myProducts'])->name('myProducts');
+        Route::post('/product/{id}/status', [MarketplaceController::class, 'updateStatus'])->name('update-status');
         Route::get('/edit/{product}', [MarketplaceController::class, 'edit'])->name('edit');
         Route::put('/update/{product}', [MarketplaceController::class, 'update'])->name('update');
         Route::delete('/delete/{product}', [MarketplaceController::class, 'destroy'])->name('destroy');
