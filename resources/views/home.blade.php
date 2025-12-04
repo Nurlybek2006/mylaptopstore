@@ -791,14 +791,14 @@
 
                     <div class="hero-actions">
                         <a href="{{ route('products.index') }}" class="btn btn-hero">
-                            <i class="fas fa-shopping-bag me-2"></i>Дүкенге бару
+                            <i class="fas fa-shopping-bag me-2"></i>{{ __('main.go_to_store') }}
                         </a>
                     </div>
 
                     <!-- Marketplace кнопкасы -->
                     <div class="marketplace-cta fade-in-up">
                         <p class="marketplace-text">
-                            Ноутбук сатқыңыз келе ме? Біздің маркетплейс арқылы оңай сатыңыз!
+                            {{ __('main.market_qw') }}
                         </p>
                         <a href="{{ route('marketplace.index') }}" class="btn btn-marketplace">
                             <i class="fas fa-store me-2"></i>
@@ -825,7 +825,7 @@
                             <i class="fas fa-laptop"></i>
                         </div>
                         <span class="stat-number">{{ $totalProducts }}</span>
-                        <span class="stat-label">Өнімдер</span>
+                        <span class="stat-label">{{ __('main.products') }}</span>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -834,7 +834,7 @@
                             <i class="fas fa-tags"></i>
                         </div>
                         <span class="stat-number">{{ $totalCategories }}</span>
-                        <span class="stat-label">Категориялар</span>
+                        <span class="stat-label">{{ __('main.categories') }}</span>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -843,7 +843,7 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <span class="stat-number">{{ $totalUsers }}</span>
-                        <span class="stat-label">Тұтынушылар</span>
+                        <span class="stat-label">{{ __('main.customers') }}</span>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -852,7 +852,7 @@
                             <i class="fas fa-award"></i>
                         </div>
                         <span class="stat-number">100%</span>
-                        <span class="stat-label">Сапа кепілі</span>
+                        <span class="stat-label">{{ __('main.quality_guarantee') }}</span>
                     </div>
                 </div>
             </div>
@@ -861,8 +861,8 @@
 
     <!-- Таңдаулы өнімдер -->
     <section class="container my-5 py-5">
-        <h2 class="section-title fade-in-up">Таңдаулы өнімдер</h2>
-        <p class="section-subtitle fade-in-up">Біздің ең жақсы ноутбуктердің тізімі</p>
+        <h2 class="section-title fade-in-up">{{ __('main.featured_products') }}</h2>
+        <p class="section-subtitle fade-in-up">{{ __('main.featured_subtitle') }}</p>
 
         <div class="products-grid">
             @foreach($featuredProducts as $product)
@@ -871,12 +871,12 @@
                     <img src="{{ $product->image ?? '/images/placeholder.jpg' }}"
                         alt="{{ $product->name }}">
                     @if($product->stock > 0)
-                    <span class="product-badge">Қоймада бар</span>
+                    <span class="product-badge">{{ __('main.in_stock') }}</span>
                     @else
-                    <span class="product-badge out-of-stock">Сатылымда жоқ</span>
+                    <span class="product-badge out-of-stock">{{ __('main.out_of_stock') }}</span>
                     @endif
                     @if(rand(0, 1))
-                    <span class="product-badge sale">Жеңілдік</span>
+                    <span class="product-badge sale">{{ __('main.sale') }}</span>
                     @endif
                 </div>
                 <div class="product-card-body">
@@ -899,7 +899,7 @@
 
                     <div class="product-price">{{ number_format($product->price, 0, ',', ' ') }} ₸</div>
                     <a href="{{ route('products.show', $product->id) }}" class="btn btn-product">
-                        <i class="fas fa-eye me-2"></i>Толығырақ
+                        <i class="fas fa-eye me-2"></i>{{ __('main.view_details') }}
                     </a>
                 </div>
             </div>
@@ -908,7 +908,7 @@
 
         <div class="text-center mt-5">
             <a href="{{ route('products.index') }}" class="btn btn-hero">
-                <i class="fas fa-list me-2"></i>Барлық өнімдерді көру
+                <i class="fas fa-list me-2"></i>{{ __('main.view_all_products') }}
             </a>
         </div>
     </section>
@@ -916,8 +916,8 @@
     <!-- Категориялар -->
     <section class="categories-section">
         <div class="container">
-            <h2 class="section-title fade-in-up">Категориялар</h2>
-            <p class="section-subtitle fade-in-up">Әр түрлі мақсаттарға арналған ноутбуктер</p>
+            <h2 class="section-title fade-in-up">{{ __('main.categories') }}</h2>
+            <p class="section-subtitle fade-in-up">{{ __('main.categories_subtitle') }}</p>
 
             <div class="row">
                 @foreach($categories as $category)
@@ -929,7 +929,7 @@
                         <h3 class="category-title">{{ $category->name }}</h3>
                         <p class="category-description">{{ $category->description }}</p>
                         <a href="{{ route('categories.show', $category->id) }}" class="btn btn-category">
-                            Өнімдерді көру
+                            {{ __('main.view_products') }}
                         </a>
                     </div>
                 </div>
@@ -941,8 +941,8 @@
     <!-- Ерекшеліктер -->
     <section class="features-section">
         <div class="container">
-            <h2 class="section-title fade-in-up">Неге бізді таңдайсыз?</h2>
-            <p class="section-subtitle fade-in-up">Біздің артықшылықтарымыз</p>
+            <h2 class="section-title fade-in-up">{{ __('main.why_choose_us') }}</h2>
+            <p class="section-subtitle fade-in-up">{{ __('main.features_subtitle') }}</p>
 
             <div class="row">
                 <div class="col-lg-3 col-md-6 mb-4">
@@ -950,8 +950,8 @@
                         <div class="feature-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3 class="feature-title">24 ай кепілдік</h3>
-                        <p class="feature-description">Барлық өнімдерге 24 айға кепілдік береді</p>
+                        <h3 class="feature-title">{{ __('main.warranty_24_months') }}</h3>
+                        <p class="feature-description">{{ __('main.warranty_description') }}</p>
                     </div>
                 </div>
 
@@ -960,8 +960,8 @@
                         <div class="feature-icon">
                             <i class="fas fa-shipping-fast"></i>
                         </div>
-                        <h3 class="feature-title">Тегін жеткізу</h3>
-                        <p class="feature-description">300.000 ₸ және одан жоғары тапсырыстарға тегін жеткізу</p>
+                        <h3 class="feature-title">{{ __('main.free_delivery') }}</h3>
+                        <p class="feature-description">{{ __('main.delivery_description') }}</p>
                     </div>
                 </div>
 
@@ -970,8 +970,8 @@
                         <div class="feature-icon">
                             <i class="fas fa-undo"></i>
                         </div>
-                        <h3 class="feature-title">14 күн ішінде қайтару</h3>
-                        <p class="feature-description">14 күн ішінде өнімді қайтаруға болады</p>
+                        <h3 class="feature-title">{{ __('main.return_14_days') }}</h3>
+                        <p class="feature-description">{{ __('main.return_description') }}</p>
                     </div>
                 </div>
 
@@ -980,8 +980,8 @@
                         <div class="feature-icon">
                             <i class="fas fa-headset"></i>
                         </div>
-                        <h3 class="feature-title">Қолдау 24/7</h3>
-                        <p class="feature-description">Тәулігіне 24 сағат техникалық қолдау көрсетеміз</p>
+                        <h3 class="feature-title">{{ __('main.support_24_7') }}</h3>
+                        <p class="feature-description">{{ __('main.support_description') }}</p>
                     </div>
                 </div>
             </div>
@@ -991,8 +991,8 @@
     <!-- Көп сатылғандар -->
     <section class="popular-section">
         <div class="container">
-            <h2 class="section-title popular-title fade-in-up">Көп сатылғандар</h2>
-            <p class="section-subtitle fade-in-up">Ең танымал ноутбуктер</p>
+            <h2 class="section-title popular-title fade-in-up">{{ __('main.bestsellers') }}</h2>
+            <p class="section-subtitle fade-in-up">{{ __('main.bestsellers_subtitle') }}</p>
 
             <div class="products-grid">
                 @foreach($popularProducts as $product)
@@ -1000,7 +1000,7 @@
                     <div class="product-image">
                         <img src="{{ $product->image ?? '/images/placeholder.jpg' }}"
                             alt="{{ $product->name }}">
-                        <span class="product-badge">Танымал</span>
+                        <span class="product-badge">{{ __('main.popular') }}</span>
                     </div>
                     <div class="product-card-body">
                         <h3 class="product-title">{{ $product->name }}</h3>
@@ -1009,7 +1009,7 @@
                         </p>
                         <div class="product-price">{{ number_format($product->price, 0, ',', ' ') }} ₸</div>
                         <a href="{{ route('products.show', $product->id) }}" class="btn btn-product">
-                            <i class="fas fa-eye me-2"></i>Толығырақ
+                            <i class="fas fa-eye me-2"></i>{{ __('main.view_details') }}
                         </a>
                     </div>
                 </div>
@@ -1022,10 +1022,10 @@
     <section class="support-section">
         <div class="container">
             <div class="support-content fade-in-up">
-                <h2 class="support-title">Көмек керек пе?</h2>
-                <p class="support-text">Біз сізге ноутбук таңдауда кеңес береміз</p>
+                <h2 class="support-title">{{ __('main.need_help') }}</h2>
+                <p class="support-text">{{ __('main.support_text') }}</p>
                 <a href="{{ route('contact.index') }}" class="btn btn-support">
-                    <i class="fas fa-phone me-2"></i>Кеңес алу
+                    <i class="fas fa-phone me-2"></i>{{ __('main.get_advice') }}
                 </a>
             </div>
         </div>
