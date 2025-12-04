@@ -1,0 +1,76 @@
+        .auth-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 450px;
+        }
+        .auth-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .auth-body {
+            padding: 30px;
+        }
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e8e8e8;
+            transition: all 0.3s;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .social-login {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            text-align: center;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        .password-strength {
+            height: 5px;
+            background: #e8e8e8;
+            border-radius: 5px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .strength-weak { width: 33%; background: #ff4757; }
+        .strength-medium { width: 66%; background: #ffa502; }
+        .strength-strong { width: 100%; background: #2ed573; }
