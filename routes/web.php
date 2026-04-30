@@ -31,13 +31,7 @@ Route::middleware(['auth'])->post('/logout', [AuthController::class, 'logout'])-
 // Басты бет
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Бот болмайтын беттер:
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index'); // ❌ бот жоқ
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index'); // ❌ бот жоқ
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index'); // ❌ бот жоқ
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); // ❌ бот жоқ
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register'); // ❌ бот жоқ
-Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard'); // ❌ бот жоқ
+
 
 
 // Продуктілер
@@ -73,11 +67,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
     Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
 });
-
-// Marketplace
-Route::get('/marketplace', function () {
-    return view('marketplace');
-})->name('marketplace');
 
 // Байланыс маршруттары
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
@@ -135,14 +124,11 @@ Route::prefix('marketplace')->name('marketplace.')->group(function () {
     // Басты бет
     Route::get('/', [MarketplaceController::class, 'index'])->name('index');
 
-        // Тауар бойынша хабарлама жіберу
+        // Тауарды хабарлама арқылы байланысу
     Route::middleware(['auth'])->post('/product/{id}/message', [MarketplaceController::class, 'sendProductMessage'])->name('send-product-message');
 
         // Тауарды көрсету
     Route::get('/product/{id}', [MarketplaceController::class, 'show'])->name('show');
-    
-    // Тауарды көрсету
-    Route::get('/product/{product}', [MarketplaceController::class, 'show'])->name('show');
     
     // Аутентификация қажет маршруттар
     Route::middleware(['auth'])->group(function () {
@@ -152,16 +138,13 @@ Route::prefix('marketplace')->name('marketplace.')->group(function () {
         Route::get('/my-products', [MarketplaceController::class, 'myProducts'])->name('myProducts');
         Route::post('/product/{id}/status', [MarketplaceController::class, 'updateStatus'])->name('update-status');
         Route::get('/edit/{product}', [MarketplaceController::class, 'edit'])->name('edit');
-        Route::post('/message/send', [MarketplaceController::class, 'sendMessage'])->name('sendMessage');
 
         Route::put('/update/{product}', [MarketplaceController::class, 'update'])->name('update');
         Route::delete('/delete/{product}', [MarketplaceController::class, 'destroy'])->name('destroy');
         
         // Хабарлама операциялары
-        Route::post('/send-message', [MarketplaceController::class, 'sendMessage'])->name('sendMessage');
+        Route::post('/message/send', [MarketplaceController::class, 'sendMessage'])->name('sendMessage');
         Route::post('/interest/{product}', [MarketplaceController::class, 'addInterest'])->name('addInterest');
-        Route::post('/marketplace/chat/send-message', [MarketplaceController::class, 'sendChatMessage'])->name('marketplace.sendChatMessage');
-
         
         // Чат операциялары
         Route::get('/chats', [MarketplaceController::class, 'chats'])->name('chats');
