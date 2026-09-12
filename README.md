@@ -1,59 +1,171 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MyLaptopStore
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+MyLaptopStore — бұл ноутбуктерді сатып алуға, сұрыптауға, бағаларды салыстыруға және әкімшілік арқылы өнімдерді басқаруға арналған Laravel негізіндегі веб-қосымшасы. Проектте тұтынушы, әкімші, Marketplace модулі, себет, Stripe төлем sistemi, байланыс формасы және AI негізді чатбот бар.
 
-## About Laravel
+## Проект жайлы
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Бұл жобада ноутбуктер мен техникалық қосымша өнімдерді online режимінде сатуға арналған интернет-магазин құрылған. Пайдаланушылар:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- өнімдерді қарауға,
+- категориялар бойынша筛треуге,
+- себетке өнім қосуға,
+- заказ беруге,
+- профилін жаңартуға,
+- байланыс/қоңырау сұрауын жіберуге,
+- marketplace арқылы басқа пайдаланушылардың өнімдерімен алмасуға мүмкіндігі бар.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Администраторлар:
 
-## Learning Laravel
+- өнімдер мен категорияларды қосуға, өзгертуге, жоюға,
+- пайдаланушыларға құқық беруге,
+- тапсырыстарды бақылауға,
+- ноутбук сұраныстарын өңдеуге,
+- marketplace-тағы өнімдер мен хабарламаларды басқаруға мүмкіндік алады.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Негізгі мүмкіндіктер
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Көп пайдаланушыға арналган магазин
+- өнімдер каталоги
+- категориялар бойынша жіктеу
+- өнім детальдары мен фотосуреттер
+- өнімді іздеу және сұрыптау
 
-## Laravel Sponsors
+### 2. Себет және тапсырыс
+- өнімді себетке қосу
+- себеттегі тауарларды көбейткіштермен жаңарту
+- дүкенге тапсырыс беру
+- Stripe арқылы онлайн төлем
+- төлем нәтижесін success/cancel беттері арқылы көрсету
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 3. Пайдаланушы профилі
+- кірігу және тіркелу
+- профильді жаңарту
+- аватарды өзгерту
+- құпия сөзді жаңарту
 
-### Premium Partners
+### 4. Админ панелі
+- dashboard
+- өнімдерді басқару
+- категорияларды басқару
+- пайдаланушыларды көру және ролін өзгерту
+- тапсырыстарды бақылау
+- ноутбук сұраныстарын өңдеу
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 5. Marketplace модулі
+- пайдаланушылар өз өнімдерін жариялайды
+- өнімдерді жариялау/өзгерту/жою
+- өнімге қызығушылық білдіру
+- хабарламалар арқылы байланыс
+- жеке чат жүйесі
 
-## Contributing
+### 6. Байланыс және чатбот
+- контакт формасы
+- ноутбук сатып алу сұранысы
+- chatbot арқылы сұрақтарға жауап беру
+- электрондық почта арқылы хабар жіберу
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Технологиялар
 
-## Code of Conduct
+- PHP 8.2
+- Laravel 12
+- MySQL / SQLite (project setup-те SQLite-ге бағытталған)
+- Blade шаблондары
+- Eloquent ORM
+- Vite + JavaScript
+- Stripe API
+- PHPMailer
+- PHPUnit
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Жоба құрылымы
 
-## Security Vulnerabilities
+```bash
+app/
+  Http/Controllers/
+  Models/
+  Services/
+config/
+database/
+public/
+resources/
+routes/
+tests/
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- `app/Models` — модельдер: Product, Order, User, Category, MarketplaceProduct, Cart, ContactMessage т.б.
+- `app/Http/Controllers` — контроллерлер
+- `routes/web.php` — барлық маршруттар
+- `resources/views` — frontend view'тер
+- `database/migrations` — мәліметтер базасы құрылымы
+- `tests` — автоматтандырылған тесттер
 
-## License
+## Жобаны локальда қосу
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1. Репозиторийді клондарыңыз
+
+```bash
+git clone <repository-url>
+cd mylaptopstore
+```
+
+### 2. Зависимостілерді орнатыңыз
+
+```bash
+composer install
+npm install
+```
+
+### 3. Середіні конфигурациялаңыз
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. База құрылымын жасап, migrant орындаңыз
+
+```bash
+php artisan migrate
+```
+
+### 5. Қосымшаны іске қосыңыз
+
+```bash
+php artisan serve
+npm run dev
+```
+
+Немесе құрастырылған setup скриптін қолдануға болады:
+
+```bash
+composer run setup
+```
+
+## Әдепкі 관리자/Login
+
+Проекттегі auth, admin және marketplace функционалдары конфигурацияланған. Жүйеге кіріп, әкімшілік панеліне кіру үшін админ пайдаланушы қажет. Егер қосымша seed/seeders бар болса, олар арқылы админ аккаунт жасалуы мүмкін.
+
+## Негізгі маршруттар
+
+- `/` — басты бет
+- `/products` — өнімдер каталоги
+- `/categories` — категориялар
+- `/cart` — себет
+- `/profile` — профиль
+- `/contact` — байланыс
+- `/about` — біз туралы
+- `/marketplace` — marketplace
+- `/admin` — әкімшілік панелі
+- `/stripe/success` — успешная төлем
+- `/stripe/cancel` — төлем тоқтатылған
+
+## Авторлық құқық
+
+Бұл проект жеке білім/дипломдық жұмыс немесе жекеленген коммерциялық/практикалық жоба ретінде әзірленді. Көшіру, жөндеу немесе кеңейту кезінде авторлық құқықты сақтау ұсынылады.
+
+## Лицензия
+
+Бұл жоба MIT лицензиясы бойынша таратылады.
+
+---
+
+Егер қажет болса, мен бұл README-ді одан да жақсырақ, "курсовой/дипломдық жұмыс" стилінде, сонымен қатар "Screenshots", "Features", "Installation", "Admin credentials" бөлімдерімен кеңейте аламын.
