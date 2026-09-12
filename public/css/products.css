@@ -269,3 +269,50 @@
             background: var(--primary);
             border-color: var(--primary);
         }
+
+        .page-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Tailwind pagination SVG fix */
+        nav[role="navigation"] svg {
+            width: 20px !important;
+            height: 20px !important;
+            display: inline !important;
+            vertical-align: middle;
+        }
+
+        nav[role="navigation"] .flex.gap-2,
+        nav[role="navigation"] .hidden.sm\:flex-1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            flex-wrap: wrap;
+        }
+
+        nav[role="navigation"] span[aria-disabled="true"] > span,
+        nav[role="navigation"] a[rel="prev"],
+        nav[role="navigation"] a[rel="next"] {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            border: 1px solid #dee2e6;
+            background: #fff;
+            color: var(--primary);
+            border-radius: 0.375rem;
+            text-decoration: none;
+        }
+
+        nav[role="navigation"] span[aria-current="page"] > span {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            border: 1px solid var(--primary);
+            background: var(--primary);
+            color: #fff;
+            border-radius: 0.375rem;
+        }
